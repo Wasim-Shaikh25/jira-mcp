@@ -119,13 +119,13 @@ npm run install-browser
 After the package is on npm, you do **not** need to clone the repo. Cursor (or your host) can start the server with:
 
 ```bash
-npx -y jira-mcp
+npx -y @svasimahmed283/jira-mcp@0.2.3
 ```
 
 Pin a version if you want reproducibility:
 
 ```bash
-npx -y jira-mcp@0.1.4
+npx -y @svasimahmed283/jira-mcp@0.2.3@0.1.4
 ```
 
 The process speaks MCP on **stdio**. In normal use the **IDE starts it**; you only run the command yourself to verify installation or debug.
@@ -158,7 +158,7 @@ Put URLs and timeouts in **`env`**. There are no secrets to configure — auth i
   "mcpServers": {
     "jira-sso": {
       "command": "npx",
-      "args": ["-y", "jira-mcp"],
+      "args": ["-y", "@svasimahmed283/jira-mcp@0.2.3"],
       "env": {
         "JIRA_BASE_URL": "https://jira.company.com",
         "JIRA_LOGIN_WAIT_SECONDS": "90"
@@ -292,21 +292,21 @@ The client maps these to the tool calls above.
 
 ```bash
 npm pack
-# Creates e.g. jira-mcp-0.1.4.tgz
+# Creates e.g. svasimahmed283-jira-mcp-0.2.3.tgz
 ```
 
 **Windows (cmd):**
 
 ```bat
 set JIRA_BASE_URL=https://jira.example.com
-npx .\jira-mcp-0.1.4.tgz
+npx .\svasimahmed283-jira-mcp-0.2.3.tgz
 ```
 
 **macOS / Linux:**
 
 ```bash
 export JIRA_BASE_URL=https://jira.example.com
-npx ./jira-mcp-0.1.4.tgz
+npx ./svasimahmed283-jira-mcp-0.2.3.tgz
 ```
 
 The first **`npx`** run may take a moment while dependencies install. If your **`mcp.json`** already defines **`JIRA_BASE_URL`**, the process may stay running on stdio (normal for MCP).
@@ -338,7 +338,7 @@ The first **`npx`** run may take a moment while dependencies install. If your **
 
 Package **`repository`**, **`homepage`**, and **`bugs`** in **`package.json`** point to **`https://github.com/Wasim-Shaikh25/jira-mcp`**. Update those fields if you fork to another org.
 
-The npm package name is **`jira-mcp`**. Legacy names: **`jira-mcp-oauth`**, **`@svasimahmed283/jira-mcp-oauth`**, repo **`jira-mcp-auth`** — deprecate on npm/GitHub after migrating clients.
+The npm package name is **`@svasimahmed283/jira-mcp`**. Legacy: **`jira-mcp-oauth`**, unscoped **`jira-mcp`** (name taken on npm), repo **`jira-mcp-auth`**.
 
 ---
 
