@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "path";
 
 /**
- * Same behavior as confluence-mcp-oauth; default preferred key env is JIRA_MCP_SERVER_KEY.
+ * Same behavior as confluence-mcp; default preferred key env is JIRA_MCP_SERVER_KEY.
  * @param {string} entryScriptAbsolute
  * @param {string[]} [legacyServerKeys]
  * @param {string} [preferredKeyEnvVar]

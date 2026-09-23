@@ -1,12 +1,14 @@
 {
-  "name": "jira-mcp-oauth",
-  "version": "0.2.2",
+  "name": "jira-mcp",
+  "version": "0.2.3",
   "description": "Model Context Protocol server for Atlassian Jira: browser SSO cookies for REST (with background session keep-alive), plus optional Confluence attachment helpers—configure for your own Jira site (Cloud or Data Center).",
   "type": "module",
   "engines": {
     "node": ">=18"
   },
-  "bin": "src/index.js",
+  "bin": {
+    "jira-mcp": "./src/index.js"
+  },
   "files": [
     "src",
     "scripts",
@@ -17,11 +19,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wasim-Shaikh25/jira-mcp-auth.git"
+    "url": "git+https://github.com/Wasim-Shaikh25/jira-mcp.git"
   },
-  "homepage": "https://github.com/Wasim-Shaikh25/jira-mcp-auth#readme",
+  "homepage": "https://github.com/Wasim-Shaikh25/jira-mcp#readme",
   "bugs": {
-    "url": "https://github.com/Wasim-Shaikh25/jira-mcp-auth/issues"
+    "url": "https://github.com/Wasim-Shaikh25/jira-mcp/issues"
   },
   "publishConfig": {
     "access": "public"

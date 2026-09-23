@@ -42,7 +42,7 @@ export function resolveJiraBoardsCachePath(projectRoot, baseUrl, mcpServerKey) {
 
 /**
  * Cookie file for Confluence REST from the Jira MCP package (separate from Jira SSO cookies).
- * Name mirrors confluence-mcp-oauth (`session-<label>.json`) but uses `cf-` prefix to avoid clashes.
+ * Name mirrors confluence-mcp (`session-<label>.json`) but uses `cf-` prefix to avoid clashes.
  */
 export function resolveConfluenceCookiePath(projectRoot, baseUrl, mcpServerKey) {
   let label = "default";

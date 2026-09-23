@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## 0.2.3
+
+### Changed
+
+- **Renamed** npm package and MCP server to **`jira-mcp`** (legacy: `jira-mcp-oauth`, `jira-mcp-auth`). GitHub repo: **`Wasim-Shaikh25/jira-mcp`**.
+
 ## 0.2.2
 
 ### Changed

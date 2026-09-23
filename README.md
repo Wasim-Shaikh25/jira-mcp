@@ -1,4 +1,4 @@
-# Jira MCP OAuth gateway
+# Jira MCP
 
 A **[Model Context Protocol](https://modelcontextprotocol.io/) (MCP)** server that connects **AI assistants** (for example **Cursor** Composer or Agent) to **your Jira site**. Configure **`JIRA_BASE_URL`** for **Atlassian Jira Cloud** or **Jira Data Center / Server**—this project is **not limited to one company or hosting model**. You can search issues, read and edit tickets, manage assignments, and more, authenticating with a **browser SSO session** (cookies). Auth is **SSO-cookie only** — there is no token/PAT mode. A background **session keep-alive** helps the cookie stay warm while the server runs.
 
@@ -8,7 +8,7 @@ A **[Model Context Protocol](https://modelcontextprotocol.io/) (MCP)** server th
 
 | Project | Purpose |
 |---------|---------|
-| **Confluence MCP** | [confluence-mcp-oauth](https://github.com/Wasim-Shaikh25/confluence-mcp-oauth) — Confluence REST + SSO ([`confluence-sso-mcp`](https://www.npmjs.com/package/confluence-sso-mcp) on npm). Same cookie design as this server. |
+| **Confluence MCP** | [confluence-mcp](https://github.com/Wasim-Shaikh25/confluence-mcp) — Confluence REST + SSO ([`confluence-mcp`](https://www.npmjs.com/package/confluence-mcp) on npm). Same cookie design as this server. |
 | **GitHub Enterprise launcher** | [mcp-github-enterprise-launcher](https://github.com/Wasim-Shaikh25/mcp-github-enterprise-launcher) — npm stdio wrapper around a `github-mcp-server` binary (optional `vendor/` bundle). |
 | **SonarQube launcher** | [mcp-sonarqube-launcher](https://github.com/Wasim-Shaikh25/mcp-sonarqube-launcher) — npm stdio wrapper around a SonarQube MCP `.jar` (optional `vendor/` bundle). |
 
@@ -24,7 +24,7 @@ A **[Model Context Protocol](https://modelcontextprotocol.io/) (MCP)** server th
 | **SSO login** | Uses **Playwright** + **Chromium** to open a real browser, let you sign in (SAML, OIDC, etc.), and saves session cookies for later API calls. |
 | **Session keep-alive** | A background loop pings **`/myself`** on an interval (**`JIRA_KEEPALIVE_SECONDS`**, default 240) to keep the session warm and warn early if the cookie goes stale. |
 
-The design matches the idea behind **`confluence-mcp-oauth`**: use a **real browser session** for corporate SSO, and treat Jira as a normal REST API with those cookies.
+The design matches the idea behind **`confluence-mcp`**: use a **real browser session** for corporate SSO, and treat Jira as a normal REST API with those cookies.
 
 ---
 
@@ -119,13 +119,13 @@ npm run install-browser
 After the package is on npm, you do **not** need to clone the repo. Cursor (or your host) can start the server with:
 
 ```bash
-npx -y jira-mcp-oauth
+npx -y jira-mcp
 ```
 
 Pin a version if you want reproducibility:
 
 ```bash
-npx -y jira-mcp-oauth@0.1.4
+npx -y jira-mcp@0.1.4
 ```
 
 The process speaks MCP on **stdio**. In normal use the **IDE starts it**; you only run the command yourself to verify installation or debug.
@@ -134,7 +134,7 @@ The process speaks MCP on **stdio**. In normal use the **IDE starts it**; you on
 
 ```bash
 git clone <your-repo-url>
-cd jira-mcp-oauth
+cd jira-mcp
 npm install
 npm run install-browser
 ```
@@ -158,7 +158,7 @@ Put URLs and timeouts in **`env`**. There are no secrets to configure — auth i
   "mcpServers": {
     "jira-sso": {
       "command": "npx",
-      "args": ["-y", "jira-mcp-oauth"],
+      "args": ["-y", "jira-mcp"],
       "env": {
         "JIRA_BASE_URL": "https://jira.company.com",
         "JIRA_LOGIN_WAIT_SECONDS": "90"
@@ -175,7 +175,7 @@ Put URLs and timeouts in **`env`**. There are no secrets to configure — auth i
   "mcpServers": {
     "jira-sso": {
       "command": "node",
-      "args": ["C:/path/to/jira-mcp-oauth/src/index.js"],
+      "args": ["C:/path/to/jira-mcp/src/index.js"],
       "env": {
         "JIRA_BASE_URL": "https://jira.company.com"
       }
@@ -284,7 +284,7 @@ The client maps these to the tool calls above.
 | **Syntax + config (no Jira calls)** | **`npm run validate`** — syntax-checks **`src/`**; with **`JIRA_BASE_URL`** set, prints resolved REST prefix and description format. |
 | **MCP wiring** | Cursor **Settings → MCP**: server shows **connected**. Restart Cursor after **`mcp.json`** changes. |
 | **Interactive tools** | In **Agent**, call **`execute_jql`** with a narrow query, or **`list_projects`**, after completing **`jira_login`**. |
-| **Inspector (optional)** | Install/run the official MCP Inspector (see [modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector)) and point it at **`node path/to/jira-mcp-oauth/src/index.js`** with the same **`env`** as Cursor. |
+| **Inspector (optional)** | Install/run the official MCP Inspector (see [modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector)) and point it at **`node path/to/jira-mcp/src/index.js`** with the same **`env`** as Cursor. |
 
 ---
 
@@ -292,21 +292,21 @@ The client maps these to the tool calls above.
 
 ```bash
 npm pack
-# Creates e.g. jira-mcp-oauth-0.1.4.tgz
+# Creates e.g. jira-mcp-0.1.4.tgz
 ```
 
 **Windows (cmd):**
 
 ```bat
 set JIRA_BASE_URL=https://jira.example.com
-npx .\jira-mcp-oauth-0.1.4.tgz
+npx .\jira-mcp-0.1.4.tgz
 ```
 
 **macOS / Linux:**
 
 ```bash
 export JIRA_BASE_URL=https://jira.example.com
-npx ./jira-mcp-oauth-0.1.4.tgz
+npx ./jira-mcp-0.1.4.tgz
 ```
 
 The first **`npx`** run may take a moment while dependencies install. If your **`mcp.json`** already defines **`JIRA_BASE_URL`**, the process may stay running on stdio (normal for MCP).
@@ -336,9 +336,9 @@ The first **`npx`** run may take a moment while dependencies install. If your **
 
 ## Repository and npm metadata
 
-Package **`repository`**, **`homepage`**, and **`bugs`** in **`package.json`** point to **`https://github.com/Wasim-Shaikh25/jira-mcp-auth`**. Update those fields if you fork to another org.
+Package **`repository`**, **`homepage`**, and **`bugs`** in **`package.json`** point to **`https://github.com/Wasim-Shaikh25/jira-mcp`**. Update those fields if you fork to another org.
 
-The npm package name is **`jira-mcp-oauth`** (unscoped). If you previously published under **`@svasimahmed283/jira-mcp-oauth`**, keep that version for backward compatibility or deprecate it on npm after publishing this name.
+The npm package name is **`jira-mcp`**. Legacy names: **`jira-mcp-oauth`**, **`@svasimahmed283/jira-mcp-oauth`**, repo **`jira-mcp-auth`** — deprecate on npm/GitHub after migrating clients.
 
 ---
 
